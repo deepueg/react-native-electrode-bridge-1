@@ -107,6 +107,14 @@ public class Address implements Bridgeable, Parcelable {
         return bundle;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("{");
+        stringBuilder.append("addressLine1:").append("\"").append(addressLine1).append("\"");
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
+
     public static class Builder {
 
         private final String addressLine1;
@@ -138,7 +146,6 @@ public class Address implements Bridgeable, Parcelable {
         public Address build() {
             return new Address(this);
         }
-
 
     }
 

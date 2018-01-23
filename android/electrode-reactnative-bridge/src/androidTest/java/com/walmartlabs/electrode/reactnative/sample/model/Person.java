@@ -26,6 +26,7 @@ import com.walmartlabs.electrode.reactnative.bridge.Bridgeable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.walmartlabs.electrode.reactnative.bridge.util.BridgeArguments.bridgeablesToBundleArray;
 import static com.walmartlabs.electrode.reactnative.bridge.util.BridgeArguments.getList;
@@ -189,6 +190,23 @@ public class Person implements Parcelable, Bridgeable {
         }
 
         return bundle;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("{");
+        builder.append("name:").append("\"").append(name).append("\"").append(",");
+        builder.append("age:").append(age).append(",");
+        builder.append("month:").append(month).append(",");
+        builder.append("status:").append(status != null ? status.toString() : null).append(",");
+        builder.append("position:").append(position != null ? position.toString() : null).append(",");
+        builder.append("birthYear:").append(birthYear != null ? birthYear.toString() : null).append(",");
+        builder.append("addressList:[").append(addressList != null ? addressList.stream().map(Object::toString).collect(Collectors.joining(",")) : null).append("],");
+        builder.append("siblingsNames:[").append(siblingsNames != null ? siblingsNames.stream().collect(Collectors.joining(",","\"","\"")): null).append(",");
+//        builder.append("siblingsNames:[").append(siblingsNames != null ? String.join(",", siblingsNames): null).append(",");
+        builder.append("}");
+
+        return builder.toString();
     }
 
     public static class Builder {
